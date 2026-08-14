@@ -120,7 +120,7 @@ def infer_column_type(column, values):
     text = {
         "postal", "zip", "cep", "phone", "telefone", "tax_id",
         "cpf", "cnpj", "document", "registration", "code",
-        "order_number"
+        "order_number", "nfe_access_key"
     }
 
     # Verifica se o nome da coluna possui qualquer elemento presente em text
