@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS "fiscal_invoices" (
     "id" BIGINT PRIMARY KEY,
     "order_id" BIGINT,
     "nfe_number" TEXT,
-    "nfe_access_key" BIGINT,
+    "nfe_access_key" TEXT,
     "series" BIGINT,
     "issued_at" TIMESTAMP,
     "status" TEXT,
