@@ -1,3 +1,4 @@
+# Questão 3.
 import duckdb
 from pathlib import Path
 
