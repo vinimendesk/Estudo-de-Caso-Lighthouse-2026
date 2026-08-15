@@ -20,15 +20,13 @@ dataset = (
         left_on = "product_variant_id",
         right_on = "id",
         how = "inner",
-        # suffixes = ("_item", "_variant")
-    )# .drop(columns = "id")
+    )
     # product_variants -> product
     .merge(
         products,
         left_on = "product_id",
         right_on = "id",
-        how = "inner",
-        # suffixes = ("_variant", "_product") 
+        how = "inner", 
     ).drop(columns = "id")
     # product -> order
     .merge(
@@ -36,7 +34,6 @@ dataset = (
         left_on = "order_id",
         right_on = "id",
         how = "inner",
-        # suffixes = ("_item", "_order") 
     ).drop(columns = "id")
 )
 
