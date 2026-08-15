@@ -297,6 +297,121 @@ with col2:
 
 st.divider()
 
+# produtos com prejuízo
+st.subheader("Produtos com prejuízo")
+
+
+prejuizos = (
+    produtos[
+        produtos["lucro"] < 0
+    ]
+    .sort_values(
+        "lucro"
+    )
+    .copy()
+)
+
+
+if prejuizos.empty:
+
+    st.success(
+        "Nenhum produto apresentou prejuízo no período selecionado."
+    )
+
+else:
+
+    col1, col2 = st.columns([1.5, 1])
+
+    with col1:
+
+        grafico_prejuizos = (
+            prejuizos
+            .head(10)
+            [
+                ["produto", "lucro"]
+            ]
+            .sort_values("lucro")
+            .set_index("produto")
+        )
+
+        st.bar_chart(
+            grafico_prejuizos
+        )
+
+    with col2:
+
+        tabela_prejuizos = prejuizos[
+            [
+                "produto",
+                "categoria",
+                "quantidade",
+                "faturamento",
+                "custo",
+                "lucro",
+            ]
+        ].head(10).copy()
+
+        tabela_prejuizos.columns = [
+            "Produto",
+            "Categoria",
+            "Itens",
+            "Faturamento",
+            "Custo",
+            "Prejuízo",
+        ]
+
+        st.dataframe(
+            tabela_prejuizos,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+
+st.divider()
+
+
+# ranking de prejuízos
+st.subheader("Ranking de prejuízos")
+
+
+if not prejuizos.empty:
+
+    ranking_prejuizos = prejuizos[
+        [
+            "produto",
+            "categoria",
+            "quantidade",
+            "faturamento",
+            "custo",
+            "lucro",
+            "margem",
+        ]
+    ].copy()
+
+    ranking_prejuizos["margem"] = (
+        ranking_prejuizos["margem"] * 100
+    ).round(2)
+
+    ranking_prejuizos.columns = [
+        "Produto",
+        "Categoria",
+        "Itens",
+        "Faturamento",
+        "Custo",
+        "Prejuízo",
+        "Margem (%)",
+    ]
+
+    st.dataframe(
+        ranking_prejuizos,
+        use_container_width=True,
+        height=400,
+        hide_index=True,
+    )
+
+
+st.divider()
+
 # quantidade de itens por categoria
 st.subheader("Quantidade de itens por categoria")
 

@@ -154,7 +154,7 @@ st.divider()
 
 
 # Top 10 clientes por lucro
-st.subheader("Top 10 clientes por lucro acumulado")
+st.subheader("Top 10 clientes por lucro")
 
 
 top_lucro = (
